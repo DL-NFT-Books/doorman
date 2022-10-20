@@ -12,7 +12,6 @@ import (
 type GenerateJwtRequest struct {
 	EthAddress string `url:"eth_address"`
 	Purpose    string `url:"purpose"`
-	Type       string `url:"type"`
 }
 
 func NewGenerateJwt(r *http.Request) (GenerateJwtRequest, error) {
@@ -29,6 +28,5 @@ func (r *GenerateJwtRequest) Validate() error {
 	return validation.Errors{
 		"eth_address=": validation.Validate(&r.EthAddress, validation.Required, validation.Match(helpers.AddressRegexp)),
 		"purpose=":     validation.Validate(r.Purpose, validation.Required, validation.By(helpers.ValidatePurposes)),
-		"type=":        validation.Validate(&r.Type, validation.Required),
 	}.Filter()
 }
