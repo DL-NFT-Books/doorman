@@ -1,4 +1,4 @@
-post:
+get:
   tags:
     - JWT
   summary: Get JWT pair
@@ -11,6 +11,18 @@ post:
         type: string
         format: Bearer {token}
         example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+    - name: 'eth_address'
+      in: query
+      required: true
+      schema:
+        type: string
+      example: '0x409748DFB31cA1424d131663918C7a45F2eA6507'
+    - name: 'purpose'
+      in: query
+      required: true
+      schema:
+        type: string
+      example: 'ethereum'
   responses:
     '200':
       description: Success
@@ -22,6 +34,11 @@ post:
               data:
                 type: object
                 $ref: '#/components/schemas/JwtPair'
+              included:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: '#/components/schemas/Jwt'
     '400':
       description: Bad Request
       content:

@@ -3,11 +3,12 @@ package handlers
 import (
 	"net/http"
 
+	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
+	"gitlab.com/tokend/nft-books/doorman/internal/service/requests"
+	"gitlab.com/tokend/nft-books/doorman/resources"
+
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"gitlab.com/tokene/doorman/internal/service/helpers"
-	"gitlab.com/tokene/doorman/internal/service/requests"
-	"gitlab.com/tokene/doorman/resources"
 )
 
 func NewJwtModel(token string, tokenType string, expTime int64) resources.Jwt {
@@ -17,18 +18,34 @@ func NewJwtModel(token string, tokenType string, expTime int64) resources.Jwt {
 	}
 	return model
 }
+
 func NewJwtPairResponseModel(accessToken resources.Jwt, refreshToken resources.Jwt) resources.JwtPairResponse {
+	included := resources.Included{}
+	included.Add(&accessToken, &refreshToken)
+
 	model := resources.JwtPairResponse{
 		Data: resources.JwtPair{
 			Key: resources.Key{Type: resources.JWT_PAIR},
-			Attributes: resources.JwtPairAttributes{
-				AccessToken:  accessToken,
-				RefreshToken: refreshToken,
+			Relationships: resources.JwtPairRelationships{
+				AccessToken: resources.Relation{
+					Data: &resources.Key{
+						ID:   accessToken.ID,
+						Type: resources.ACCESS_JWT,
+					},
+				},
+				RefreshToken: resources.Relation{
+					Data: &resources.Key{
+						ID:   refreshToken.ID,
+						Type: resources.REFRESH_JWT,
+					},
+				},
 			},
 		},
+		Included: included,
 	}
 	return model
 }
+
 func GenerateJwtPair(w http.ResponseWriter, r *http.Request) {
 	logger := helpers.Log(r)
 
@@ -39,13 +56,13 @@ func GenerateJwtPair(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	accessToken, sessioExp, err := helpers.GenerateJWT(request, helpers.ServiceConfig(r))
+	accessToken, sessioExp, err := helpers.GenerateJWT(request.EthAddress, request.Purpose, helpers.ServiceConfig(r))
 	if err != nil {
 		logger.WithError(err).Debug("cannot generate session token")
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
-	refreshToken, refreshExp, err := helpers.GenerateRefreshToken(request, helpers.ServiceConfig(r))
+	refreshToken, refreshExp, err := helpers.GenerateRefreshToken(request.EthAddress, helpers.ServiceConfig(r))
 	if err != nil {
 		logger.WithError(err).Debug("cannot generate refresh token")
 		ape.RenderErr(w, problems.InternalError())

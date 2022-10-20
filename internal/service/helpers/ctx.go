@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"gitlab.com/distributed_lab/logan/v3"
-	"gitlab.com/tokene/doorman/internal/config"
+	"gitlab.com/tokend/nft-books/doorman/internal/config"
 	gosdk "gitlab.com/tokene/go-sdk"
 )
 

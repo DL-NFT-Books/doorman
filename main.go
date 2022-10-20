@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"gitlab.com/tokene/doorman/internal/cli"
+	"gitlab.com/tokend/nft-books/doorman/internal/cli"
 )
 
 func main() {

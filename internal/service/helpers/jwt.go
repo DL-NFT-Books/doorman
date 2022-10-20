@@ -7,8 +7,8 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/pkg/errors"
-	"gitlab.com/tokene/doorman/internal/config"
-	"gitlab.com/tokene/doorman/resources"
+
+	"gitlab.com/tokend/nft-books/doorman/internal/config"
 )
 
 type standardClaims struct {
@@ -21,12 +21,12 @@ type refreshTokenClaims struct {
 	jwt.StandardClaims
 }
 
-func GenerateJWT(user_claims resources.JwtClaimsAttributes, cfg *config.ServiceConfig) (string, int64, error) {
+func GenerateJWT(address, purpose string, cfg *config.ServiceConfig) (string, int64, error) {
 	expirationTime := time.Now().Add(cfg.TokenExpireTime)
 
 	claims := &standardClaims{
-		Address: strings.ToLower(user_claims.EthAddress),
-		Purpose: user_claims.Purpose.Type,
+		Address: strings.ToLower(address),
+		Purpose: purpose,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
@@ -41,11 +41,11 @@ func GenerateJWT(user_claims resources.JwtClaimsAttributes, cfg *config.ServiceC
 	return tokenString, expirationTime.Unix(), nil
 }
 
-func GenerateRefreshToken(user_claims resources.JwtClaimsAttributes, cfg *config.ServiceConfig) (string, int64, error) {
+func GenerateRefreshToken(address string, cfg *config.ServiceConfig) (string, int64, error) {
 	expirationTime := time.Now().Add(cfg.RefreshTokenExpireTime)
 
 	claims := refreshTokenClaims{
-		Address: strings.ToLower(user_claims.EthAddress),
+		Address: strings.ToLower(address),
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},

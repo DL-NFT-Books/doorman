@@ -3,7 +3,7 @@ package connector
 import (
 	"net/http"
 
-	"gitlab.com/tokene/doorman/resources"
+	"gitlab.com/tokend/nft-books/doorman/resources"
 )
 
 type ConnectorI interface {

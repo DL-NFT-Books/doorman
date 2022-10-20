@@ -5,8 +5,9 @@ import (
 
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"gitlab.com/tokene/doorman/internal/service/helpers"
-	"gitlab.com/tokene/doorman/resources"
+
+	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
+	"gitlab.com/tokend/nft-books/doorman/resources"
 )
 
 func RefreshJwt(w http.ResponseWriter, r *http.Request) {
@@ -25,14 +26,14 @@ func RefreshJwt(w http.ResponseWriter, r *http.Request) {
 		Purpose:    resources.Purpose{Type: "session"},
 	}
 
-	accessToken, sessioExp, err := helpers.GenerateJWT(claims, helpers.ServiceConfig(r))
+	accessToken, sessioExp, err := helpers.GenerateJWT(claims.EthAddress, claims.Purpose.Type, helpers.ServiceConfig(r))
 	if err != nil {
 		logger.WithError(err).Debug(err)
 		ape.RenderErr(w, problems.InternalError())
 		return
 	}
 
-	refreshToken, refreshExp, err := helpers.GenerateRefreshToken(claims, helpers.ServiceConfig(r))
+	refreshToken, refreshExp, err := helpers.GenerateRefreshToken(claims.EthAddress, helpers.ServiceConfig(r))
 	if err != nil {
 		logger.WithError(err).Debug(err)
 		ape.RenderErr(w, problems.InternalError())

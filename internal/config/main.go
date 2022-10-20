@@ -12,6 +12,8 @@ type Config interface {
 	types.Copuser
 	comfig.Listenerer
 	ServiceConfiger
+
+	AdminsConfig() AdminsConfig
 }
 
 type config struct {
@@ -20,6 +22,8 @@ type config struct {
 	comfig.Listenerer
 	getter kv.Getter
 	ServiceConfiger
+
+	admins comfig.Once
 }
 
 func New(getter kv.Getter) Config {

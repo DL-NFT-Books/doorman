@@ -1,8 +1,9 @@
 log:
+  level: debug
   disable_sentry: true
 
 listener:
-  addr: :8000
+  addr: :8054
 
 cop:
   disabled: true
@@ -12,6 +13,10 @@ cop:
   service_port: 80
   
 service:
-  token_expire_time: 1h or other value, see time.ParseDuration
-  token_key:  "something sha256'd, has to be a 64 char long hex string"
-  refresh_token_expire_time: 8hor other value, see time.ParseDuration
+  token_expire_time: 4h
+  token_key: "0x61dbf961f608d1d0d31bfde550505d53cf63f85ab4cb938159a11aacecc29b3d"
+  refresh_token_expire_time: 24h
+
+admins:
+  list: # Temporal solution. List of the admins will be taken from a contract in future version
+    - "0x409748DFB31cA1424d131663918C7a45F2eA6507"

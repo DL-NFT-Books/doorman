@@ -1,29 +1,34 @@
 package requests
 
 import (
-	"encoding/json"
 	"net/http"
 
+	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
+
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pkg/errors"
-	"gitlab.com/tokene/doorman/internal/service/helpers"
-	"gitlab.com/tokene/doorman/resources"
+	"gitlab.com/distributed_lab/urlval"
 )
 
-func NewGenerateJwt(r *http.Request) (resources.JwtClaimsAttributes, error) {
-	var request resources.JwtClaims
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		return request.Attributes, errors.Wrap(err, "failed to unmarshal")
-	}
-	return request.Attributes, validateClaims(request)
+type GenerateJwtRequest struct {
+	EthAddress string `url:"eth_address"`
+	Purpose    string `url:"purpose"`
+	Type       string `url:"type"`
 }
-func validateClaims(r resources.JwtClaims) error {
+
+func NewGenerateJwt(r *http.Request) (GenerateJwtRequest, error) {
+	var request GenerateJwtRequest
+
+	if err := urlval.Decode(r.URL.Query(), &request); err != nil {
+		return request, err
+	}
+
+	return request, request.Validate()
+}
+
+func (r *GenerateJwtRequest) Validate() error {
 	return validation.Errors{
-		"/attributes/eth_address": validation.Validate(&r.Attributes.EthAddress, validation.Required, validation.Match(helpers.AddressRegexp)),
-		"/attributes/purpose": validation.Validate(string(r.Attributes.Purpose.Type),
-			validation.Required,
-			validation.By(helpers.ValidatePurposes)),
-		"/type": validation.Validate(&r.Type,
-			validation.Required),
+		"eth_address=": validation.Validate(&r.EthAddress, validation.Required, validation.Match(helpers.AddressRegexp)),
+		"purpose=":     validation.Validate(r.Purpose, validation.Required, validation.By(helpers.ValidatePurposes)),
+		"type=":        validation.Validate(&r.Type, validation.Required),
 	}.Filter()
 }

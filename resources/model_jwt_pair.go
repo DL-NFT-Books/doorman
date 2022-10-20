@@ -6,7 +6,7 @@ package resources
 
 type JwtPair struct {
 	Key
-	Attributes JwtPairAttributes `json:"attributes"`
+	Relationships JwtPairRelationships `json:"relationships"`
 }
 type JwtPairResponse struct {
 	Data     JwtPair  `json:"data"`

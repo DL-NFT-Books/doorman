@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/chi"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/pkg/errors"
-	"gitlab.com/tokene/doorman/internal/service/helpers"
+	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
 )
 
 func NewCheckResourcePermission(r *http.Request) (string, error) {

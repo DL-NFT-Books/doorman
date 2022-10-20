@@ -5,8 +5,8 @@ import (
 
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"gitlab.com/tokene/doorman/internal/service/helpers"
-	"gitlab.com/tokene/doorman/resources"
+	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
+	"gitlab.com/tokend/nft-books/doorman/resources"
 )
 
 func CheckPurpose(w http.ResponseWriter, r *http.Request) {

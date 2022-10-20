@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"gitlab.com/tokene/doorman/internal/config"
-	"gitlab.com/tokene/doorman/internal/service"
+	"gitlab.com/tokend/nft-books/doorman/internal/config"
+	"gitlab.com/tokend/nft-books/doorman/internal/service"
 
 	"github.com/alecthomas/kingpin"
 	"gitlab.com/distributed_lab/kit/kv"
