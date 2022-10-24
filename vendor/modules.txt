@@ -120,9 +120,9 @@ gitlab.com/distributed_lab/running
 gitlab.com/distributed_lab/urlval
 gitlab.com/distributed_lab/urlval/internal
 gitlab.com/distributed_lab/urlval/internal/betterreflect
-# gitlab.com/tokene/go-sdk v0.1.1
+# gitlab.com/tokend/nft-books/go-sdk v0.1.2
 ## explicit; go 1.18
-gitlab.com/tokene/go-sdk
+gitlab.com/tokend/nft-books/go-sdk
 # golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 ## explicit; go 1.17
 golang.org/x/crypto/sha3

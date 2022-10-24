@@ -14,7 +14,7 @@ require (
 	gitlab.com/distributed_lab/kit v1.11.1
 	gitlab.com/distributed_lab/logan v3.8.1+incompatible
 	gitlab.com/distributed_lab/urlval v3.0.0+incompatible
-	gitlab.com/tokene/go-sdk v0.1.1
+	gitlab.com/tokend/nft-books/go-sdk v0.1.2
 )
 
 require (

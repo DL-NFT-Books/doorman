@@ -1,14 +1,13 @@
 package service
 
 import (
-	gosdk "gitlab.com/tokene/go-sdk"
+	"github.com/go-chi/chi"
+	"gitlab.com/distributed_lab/ape"
+	gosdk "gitlab.com/tokend/nft-books/go-sdk"
 
 	"gitlab.com/tokend/nft-books/doorman/internal/config"
 	"gitlab.com/tokend/nft-books/doorman/internal/service/handlers"
 	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
-
-	"github.com/go-chi/chi"
-	"gitlab.com/distributed_lab/ape"
 )
 
 func (s *service) router(cfg config.Config) chi.Router {
