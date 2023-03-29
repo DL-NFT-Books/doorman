@@ -4,7 +4,7 @@ import (
 	"net"
 	"net/http"
 
-	"gitlab.com/tokend/nft-books/doorman/internal/config"
+	"github.com/dl-nft-books/doorman/internal/config"
 
 	"gitlab.com/distributed_lab/kit/copus/types"
 	"gitlab.com/distributed_lab/logan/v3"

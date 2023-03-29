@@ -1,10 +1,11 @@
-module gitlab.com/tokend/nft-books/doorman
+module github.com/dl-nft-books/doorman
 
 go 1.18
 
 require (
 	github.com/alecthomas/kingpin v2.2.6+incompatible
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/dl-nft-books/go-sdk v0.1.3-0.20230323134428-c084d93a35a8
 	github.com/ethereum/go-ethereum v1.10.23
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-ozzo/ozzo-validation/v4 v4.2.1
@@ -14,7 +15,6 @@ require (
 	gitlab.com/distributed_lab/kit v1.11.1
 	gitlab.com/distributed_lab/logan v3.8.1+incompatible
 	gitlab.com/distributed_lab/urlval v3.0.0+incompatible
-	gitlab.com/tokend/nft-books/go-sdk v0.1.2
 )
 
 require (

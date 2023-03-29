@@ -7,8 +7,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
-	"gitlab.com/tokend/nft-books/doorman/internal/service/requests"
+	"github.com/dl-nft-books/doorman/internal/service/helpers"
+	"github.com/dl-nft-books/doorman/internal/service/requests"
 )
 
 func CheckResourcePermission(w http.ResponseWriter, r *http.Request) {

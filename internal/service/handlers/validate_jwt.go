@@ -5,8 +5,8 @@ import (
 
 	"gitlab.com/distributed_lab/ape"
 	"gitlab.com/distributed_lab/ape/problems"
-	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
-	"gitlab.com/tokend/nft-books/doorman/resources"
+	"github.com/dl-nft-books/doorman/internal/service/helpers"
+	"github.com/dl-nft-books/doorman/resources"
 )
 
 func ValidateJWT(w http.ResponseWriter, r *http.Request) {

@@ -1,13 +1,12 @@
 package service
 
 import (
+	"github.com/dl-nft-books/doorman/internal/config"
+	"github.com/dl-nft-books/doorman/internal/service/handlers"
+	"github.com/dl-nft-books/doorman/internal/service/helpers"
+	gosdk "github.com/dl-nft-books/go-sdk"
 	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
-	gosdk "gitlab.com/tokend/nft-books/go-sdk"
-
-	"gitlab.com/tokend/nft-books/doorman/internal/config"
-	"gitlab.com/tokend/nft-books/doorman/internal/service/handlers"
-	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
 )
 
 func (s *service) router(cfg config.Config) chi.Router {

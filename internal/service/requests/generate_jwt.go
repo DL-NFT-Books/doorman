@@ -3,7 +3,7 @@ package requests
 import (
 	"net/http"
 
-	"gitlab.com/tokend/nft-books/doorman/internal/service/helpers"
+	"github.com/dl-nft-books/doorman/internal/service/helpers"
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"gitlab.com/distributed_lab/urlval"
