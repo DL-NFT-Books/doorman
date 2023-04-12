@@ -17,6 +17,6 @@ service:
   token_key: "0x61dbf961f608d1d0d31bfde550505d53cf63f85ab4cb938159a11aacecc29b3d"
   refresh_token_expire_time: 24h
 
-admins:
-  list: # Temporal solution. List of the admins will be taken from a contract in future version
-    - "0x409748DFB31cA1424d131663918C7a45F2eA6507"
+connector:
+  url: url
+  token: token

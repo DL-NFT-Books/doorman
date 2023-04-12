@@ -2,12 +2,12 @@ package helpers
 
 import (
 	"context"
-	gosdk "github.com/dl-nft-books/go-sdk"
 	"net/http"
 
 	"gitlab.com/distributed_lab/logan/v3"
 
 	"github.com/dl-nft-books/doorman/internal/config"
+	networkConnector "github.com/dl-nft-books/network-svc/connector"
 )
 
 type ctxKey int
@@ -15,7 +15,7 @@ type ctxKey int
 const (
 	logCtxKey ctxKey = iota
 	serviceConfigCtxKey
-	nodeAdminsCtxKey
+	networkConnectorCtxKey
 )
 
 func CtxLog(entry *logan.Entry) func(context.Context) context.Context {
@@ -36,11 +36,11 @@ func ServiceConfig(r *http.Request) *config.ServiceConfig {
 	return r.Context().Value(serviceConfigCtxKey).(*config.ServiceConfig)
 }
 
-func CtxNodeAdmins(entry gosdk.NodeAdminsI) func(context.Context) context.Context {
+func CtxNetworkConnector(entry networkConnector.Connector) func(context.Context) context.Context {
 	return func(ctx context.Context) context.Context {
-		return context.WithValue(ctx, nodeAdminsCtxKey, entry)
+		return context.WithValue(ctx, networkConnectorCtxKey, entry)
 	}
 }
-func NodeAdmins(r *http.Request) gosdk.NodeAdminsI {
-	return r.Context().Value(nodeAdminsCtxKey).(gosdk.NodeAdminsI)
+func NetworkConnector(r *http.Request) networkConnector.Connector {
+	return r.Context().Value(networkConnectorCtxKey).(networkConnector.Connector)
 }
